@@ -6,18 +6,23 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
     entry: {
-        main: path.join(__dirname, '/app/app.js')
+        main: path.join(__dirname, '/app/index.js')
     },
     output: {
         path: buildPath, // Path of output file
         filename: 'app.js', // Name of output file
     },
+    externals: ["bindings","serialport"],
     module:{
         loaders: [
             {
                 test: /\.js$/, // All .js files
                 loaders: ['babel-loader'], // react-hot is like browser sync and babel loads jsx and es6-7
                 exclude: [nodeModulesPath]
+            },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
             }
         ]
     },
